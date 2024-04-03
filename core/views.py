@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Course, Module
 from .forms import UniversityForm
+from django.http.response import HttpResponse
 
 # Create your views here.
 
@@ -14,11 +15,6 @@ def courses(request):
 
 
 def modules(request):
-    course = request.GET.get('course')
-    modules = Module.objects.filter(course=course)
+    form = UniversityForm(request.GET)
 
-    context  = {
-        'modules': modules
-    }
-
-    return render(request, 'partials/modules.html', context)
+    return HttpResponse(form['modules'])

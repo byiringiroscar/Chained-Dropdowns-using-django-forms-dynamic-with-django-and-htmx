@@ -3,10 +3,11 @@
 {% load widget_tweaks %}
 
 {% block content %}
-    {{ form.course.label_tag }}
-    {% render_field form.course class="custom-select mb-4" autocomplete="off" %}
-    <div id="modules">
-        {{ form.modules.label_tag }}
-        {% render_field form.modules class="custom-select mb-4" autocomplete="off" %}  
-    </div>
+
+{{ form.course.label_tag }}
+{% render_field form.course class="custom-select mb-4" autocomplete="off" hx-get="/modules/" hx-target="#id_modules" %}
+   
+{{ form.modules.label_tag }}
+{% render_field form.modules class="custom-select mb-4" autocomplete="off" %}  <!-- When you insepct in dev mode you find the id of this is #id_modules -->
+
 {% endblock %}
