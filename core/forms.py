@@ -1,10 +1,25 @@
 from django import forms
 from .models import Course, Module
+from dynamic_forms import DynamicField, DynamicFormMixin
 
 
 
-class UniverstiyForm(forms.Form):
+class UniversityForm(DynamicFormMixin, forms.Form):
+    def module_choices(form):
+        course = form['course'].value()
+        return Module.objects.filter(course=course)
+    
+    def initial_module(form):
+        course = form['course'].value()
+        return Module.objects.filter(course=course).first() 
+    
     course = forms.ModelChoiceField(
         queryset=Course.objects.all(),
         initial=Course.objects.first(),
         )
+
+    modules = DynamicField(
+        forms.ModelChoiceField,
+        queryset=module_choices,
+        initial=initial_module
+    )

@@ -6,6 +6,7 @@
     {{ form.course.label_tag }}
     {% render_field form.course class="custom-select mb-4" autocomplete="off" %}
     <div id="modules">
-             {% include "partials/modules.html" %} 
+        {{ form.modules.label_tag }}
+        {% render_field form.modules class="custom-select mb-4" autocomplete="off" %}  
     </div>
 {% endblock %}
