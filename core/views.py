@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from .models import Course, Module
+from .forms import UniverstiyForm
 
 # Create your views here.
 
 
 def courses(request):
-    courses = Course.objects.all()
+    form = UniverstiyForm()
     context = {
-        'courses': courses
+        'form': form
     }
     return render(request, 'university.html', context)
 
